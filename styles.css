@@ -1,11 +1,16 @@
+body {
+  background-color: var(--base);
+  color: var(--text);
+}
+
 .topnav {
-    background-color: blanchedalmond;
+    background-color: var(--crust);
     overflow: hidden;
 }
 
 .topnav a {
   float: left;
-  color: #f2f2f2;
+  color: inherit;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -22,4 +27,24 @@
 .topnav a.active {
   background-color: #04AA6D;
   color: white;
+}
+
+.topnav button.themeChanger {
+  float: right;
+  border: none;
+  background-color: inherit;
+  padding: 0;
+  margin: 0;
+  display: block;
+  height: 48px;
+}
+
+.topnav button.themeChanger img {
+  height: 48px;
+  width: 48px;
+  content: var(--theme_indicator);
+}
+
+button.themeChanger:hover {
+  background-color: blue;
 }

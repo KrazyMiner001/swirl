@@ -7,8 +7,8 @@ const Theme = {
 }
 
 const ThemeColors = {
-  dark_theme_indicator: "url(\"./dark_theme.svg\")",
-  light_theme_indicator: "url(\"./light_theme.svg\")",
+  dark_theme_indicator: "url(\"./assets/dark_theme.svg\")",
+  light_theme_indicator: "url(\"./assets/light_theme.svg\")",
 }
 
 

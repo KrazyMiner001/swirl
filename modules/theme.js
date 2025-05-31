@@ -1,4 +1,5 @@
 import { flavors } from "https://esm.sh/@catppuccin/palette";
+import Cookies from "https://esm.sh/js-cookie"
 
 const Theme = {
   DARK: "dark",
@@ -10,14 +11,15 @@ const ThemeColors = {
   light_theme_indicator: "url(\"./light_theme.svg\")",
 }
 
+
 const DEFAULT_THEME = Theme.LIGHT;
 
 function setTheme() {
-  if (getCookie("theme") === "") {
-    setCookie("theme", headerTheme(), 90);
+  if (Cookies.get('theme') === undefined) {
+    Cookies.set('theme', headerTheme());
   }
 
-  let theme = getCookie("theme");
+  let theme = Cookies.get("theme");
   let catppuccinTheme = toCatppuccinTheme(theme);
 
   document.documentElement.style.setProperty("--theme", theme);
@@ -44,11 +46,11 @@ function toCatppuccinTheme(theme) {
 }
 
 function toggleTheme() {
-  let old_theme = getCookie("theme");
+  let old_theme = Cookies.get("theme");
   if (old_theme === "dark") {
-    setCookie("theme", "light");
+    Cookies.set("theme", "light");
   } else if (old_theme === "light") {
-    setCookie("theme", "dark");
+    Cookies.set("theme", "dark");
   }
 
   setTheme();
@@ -62,28 +64,6 @@ function headerTheme() {
   } else {
     return DEFAULT_THEME;
   }
-}
-
-function setCookie(name, value, exdays) {
-  const d = new Date();
-  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-  let expires = "expires="+d.toUTCString();
-  document.cookie = name + "=" + value + ";" + expires + ";path=/";
-}
-
-function getCookie(name) {
-  name = name + "=";
-  let ca = document.cookie.split(';');
-  for(let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
 }
 
 export { setTheme, toggleTheme };

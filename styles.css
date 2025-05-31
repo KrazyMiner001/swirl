@@ -44,7 +44,3 @@ body {
   width: 48px;
   content: var(--theme_indicator);
 }
-
-button.themeChanger:hover {
-  background-color: blue;
-}

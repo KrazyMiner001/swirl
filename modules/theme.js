@@ -7,26 +7,29 @@ const Theme = {
 }
 
 const ThemeColors = {
-  dark_theme_indicator: "url(\"./assets/dark_theme.svg\")",
-  light_theme_indicator: "url(\"./assets/light_theme.svg\")",
+  dark_theme_indicator: "/assets/dark_theme.svg",
+  light_theme_indicator: "/assets/light_theme.svg",
 }
 
 
 const DEFAULT_THEME = Theme.LIGHT;
+var currentTheme = null;
 
 function setTheme() {
-  if (Cookies.get('theme') === undefined) {
+  let theme = Cookies.get("theme");
+
+  if (theme === undefined || (theme !== Theme.LIGHT && theme !== Theme.DARK)) {
     Cookies.set('theme', headerTheme());
+    theme = headerTheme();
   }
 
-  let theme = Cookies.get("theme");
   let catppuccinTheme = toCatppuccinTheme(theme);
 
   document.documentElement.style.setProperty("--theme", theme);
 
   for (var type in ThemeColors) {
     if (type.startsWith(theme)) {
-      document.documentElement.style.setProperty("--" + type.replaceAll("dark_", "").replaceAll("light_", ""), ThemeColors[type]);
+      document.getElementById("themeChangeImage").src = ThemeColors[type]
     }
   }
 

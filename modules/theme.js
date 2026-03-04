@@ -2,8 +2,8 @@ import { flavors } from "https://esm.sh/@catppuccin/palette";
 import Cookies from "https://esm.sh/js-cookie"
 
 const ThemeColors = {
-  dark_theme_indicator: "/assets/dark_theme.svg",
-  light_theme_indicator: "/assets/light_theme.svg",
+  dark_theme_indicator: "./assets/dark_theme.svg",
+  light_theme_indicator: "./assets/light_theme.svg",
 }
 
 

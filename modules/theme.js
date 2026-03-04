@@ -1,9 +1,9 @@
-import { flavors } from "https://esm.sh/@catppuccin/palette";
+import {flavors} from "https://esm.sh/@catppuccin/palette";
 import Cookies from "https://esm.sh/js-cookie"
 
 const ThemeColors = {
-  dark_theme_indicator: "./assets/dark_theme.svg",
-  light_theme_indicator: "./assets/light_theme.svg",
+    dark_theme_indicator: "./assets/dark_theme.svg",
+    light_theme_indicator: "./assets/light_theme.svg",
 }
 
 
@@ -12,56 +12,56 @@ const themeChangeImage = document.getElementById("themeChangeImage");
 const themeChangeButton = document.getElementById("themeChangeButton");
 
 function setTheme() {
-  testCookie();
-  let isDark = getCookie();
+    testCookie();
+    let isDark = getCookie();
 
-  let catppuccinTheme = isDark ? "frappe" : "latte";
+    let catppuccinTheme = isDark ? "frappe" : "latte";
 
-  for (var color in flavors[catppuccinTheme]["colors"]) {
-    document.documentElement.style.setProperty("--" + color, flavors[catppuccinTheme]["colors"][color]["hex"])
-  }
+    for (var color in flavors[catppuccinTheme]["colors"]) {
+        document.documentElement.style.setProperty("--" + color, flavors[catppuccinTheme]["colors"][color]["hex"])
+    }
 
-  if (themeChangeImage == null) return;
+    if (themeChangeImage == null) return;
 
-  if (isDark) {
-    themeChangeImage.src = ThemeColors.dark_theme_indicator
-  } else {
-    themeChangeImage.src = ThemeColors.light_theme_indicator
-  }
+    if (isDark) {
+        themeChangeImage.src = ThemeColors.dark_theme_indicator
+    } else {
+        themeChangeImage.src = ThemeColors.light_theme_indicator
+    }
 
-  if (themeChangeButton == null) return;
+    if (themeChangeButton == null) return;
 
-  themeChangeButton.ariaLabel = "Change theme to " + isDark ? "dark theme" : "light theme"
+    themeChangeButton.ariaLabel = "Change theme to " + isDark ? "dark theme" : "light theme"
 }
 
 function toggleTheme() {
-  setCookie(!getCookie())
+    setCookie(!getCookie())
 
-  setTheme();
+    setTheme();
 }
 
 function headerTheme() {
-  if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-    return false;
-  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    return true;
-  } else {
-    return DEFAULT_THEME;
-  }
+    if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        return false;
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return true;
+    } else {
+        return DEFAULT_THEME;
+    }
 }
 
 function getCookie() {
-  return Cookies.get("isDark") === "true"
+    return Cookies.get("isDark") === "true"
 }
 
 function setCookie(value) {
-  Cookies.set("isDark", value)
+    Cookies.set("isDark", value)
 }
 
 function testCookie() {
-  if (!(Cookies.get("isDark") === "true" || Cookies.get("isDark") === "false")) {
-    Cookies.set("isDark", headerTheme())
-  }
+    if (!(Cookies.get("isDark") === "true" || Cookies.get("isDark") === "false")) {
+        Cookies.set("isDark", headerTheme())
+    }
 }
 
-export { setTheme, toggleTheme };
+export {setTheme, toggleTheme};

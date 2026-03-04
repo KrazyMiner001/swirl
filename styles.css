@@ -9,11 +9,14 @@ a {
     &:link {
         color: var(--blue);
     }
+
     &:hover, &:active, &:focus {
         color: var(--lavender);
     }
+
     &:visited {
         color: var(--mauve);
+
         &:hover, &:active, &:focus {
             color: var(--pink);
         }

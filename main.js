@@ -1,4 +1,4 @@
-import { setTheme, toggleTheme } from "./modules/theme.js";
+import {setTheme, toggleTheme} from "./modules/theme.js";
 
 setTheme();
 const button = document.getElementById("themeChangeButton");

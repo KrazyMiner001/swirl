@@ -1,4 +1,5 @@
 import { setTheme, toggleTheme } from "./modules/theme.js";
 
 setTheme();
-document.getElementById("themeChangeButton").onclick = toggleTheme;
+const button = document.getElementById("themeChangeButton");
+if (button != null) button.onclick = toggleTheme

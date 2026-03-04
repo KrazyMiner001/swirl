@@ -8,23 +8,30 @@ const ThemeColors = {
 
 
 const DEFAULT_THEME = false;
+const themeChangeImage = document.getElementById("themeChangeImage");
+const themeChangeButton = document.getElementById("themeChangeButton");
+
 function setTheme() {
   testCookie();
   let isDark = getCookie();
 
   let catppuccinTheme = isDark ? "frappe" : "latte";
 
-  if (isDark) {
-    document.getElementById("themeChangeImage").src = ThemeColors.dark_theme_indicator
-  } else {
-    document.getElementById("themeChangeImage").src = ThemeColors.light_theme_indicator
-  }
-
   for (var color in flavors[catppuccinTheme]["colors"]) {
     document.documentElement.style.setProperty("--" + color, flavors[catppuccinTheme]["colors"][color]["hex"])
   }
 
-  document.getElementById("themeChangeButton").ariaLabel = "Change theme to " + isDark ? "dark theme" : "light theme"
+  if (themeChangeImage == null) return;
+
+  if (isDark) {
+    themeChangeImage.src = ThemeColors.dark_theme_indicator
+  } else {
+    themeChangeImage.src = ThemeColors.light_theme_indicator
+  }
+
+  if (themeChangeButton == null) return;
+
+  themeChangeButton.ariaLabel = "Change theme to " + isDark ? "dark theme" : "light theme"
 }
 
 function toggleTheme() {

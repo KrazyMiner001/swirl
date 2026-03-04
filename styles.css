@@ -1,12 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
 body {
     background-color: var(--base);
     color: var(--text);
 }
 
 a {
-    color: var(--blue);
-    &:hover {
+    &:link {
+        color: var(--blue);
+    }
+    &:hover, &:active, &:focus {
         color: var(--lavender);
+    }
+    &:visited {
+        color: var(--mauve);
+        &:hover, &:active, &:focus {
+            color: var(--pink);
+        }
     }
 }
 
@@ -23,20 +33,19 @@ a {
     }
 
     a {
-        color: var(--mauve);
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
         font-size: 1.3em;
         display: block;
 
-        &:hover {
-            background-color: #ddd;
+        &:hover, &:active, &:focus {
+            background-color: #aaa;
             color: black;
         }
 
         &.active {
-            background-color: #04AA6D;
+            background-color: #007e46;
             color: white;
         }
     }
@@ -45,9 +54,8 @@ a {
         &.themeChanger {
             border: none;
             background-color: inherit;
-            padding: 0;
-            margin: 4px;
-            display: block;
+            display: grid;
+            place-items: center;
         }
 
         &.themeChanger img {
@@ -70,7 +78,7 @@ a {
         width: 40em;
         height: 10em;
         display: grid;
-        align-items: left;
+        grid-template-columns: 10em auto;
         outline-color: var(--grey);
         outline-width: 5px;
         outline-style: solid;
@@ -99,11 +107,15 @@ a {
     }
 }
 
-.games-list {
-    li {
-        a {
-            text-decoration: none;
-            color: var(--text);
-        }
-    }
+main {
+    max-width: 70ch;
+    margin: auto;
+    font-family: "Sour Gummy", sans-serif;
+    font-weight: 350;
+}
+
+footer {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
 }

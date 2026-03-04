@@ -1,71 +1,59 @@
 import { flavors } from "https://esm.sh/@catppuccin/palette";
 import Cookies from "https://esm.sh/js-cookie"
 
-const Theme = {
-  DARK: "dark",
-  LIGHT: "light"
-}
-
 const ThemeColors = {
   dark_theme_indicator: "/assets/dark_theme.svg",
   light_theme_indicator: "/assets/light_theme.svg",
 }
 
 
-const DEFAULT_THEME = Theme.LIGHT;
-var currentTheme = null;
-
+const DEFAULT_THEME = false;
 function setTheme() {
-  let theme = Cookies.get("theme");
+  testCookie();
+  let isDark = getCookie();
 
-  if (theme === undefined || (theme !== Theme.LIGHT && theme !== Theme.DARK)) {
-    Cookies.set('theme', headerTheme());
-    theme = headerTheme();
-  }
+  let catppuccinTheme = isDark ? "frappe" : "latte";
 
-  let catppuccinTheme = toCatppuccinTheme(theme);
-
-  document.documentElement.style.setProperty("--theme", theme);
-
-  for (var type in ThemeColors) {
-    if (type.startsWith(theme)) {
-      document.getElementById("themeChangeImage").src = ThemeColors[type]
-    }
+  if (isDark) {
+    document.getElementById("themeChangeImage").src = ThemeColors.dark_theme_indicator
+  } else {
+    document.getElementById("themeChangeImage").src = ThemeColors.light_theme_indicator
   }
 
   for (var color in flavors[catppuccinTheme]["colors"]) {
     document.documentElement.style.setProperty("--" + color, flavors[catppuccinTheme]["colors"][color]["hex"])
   }
-}
 
-function toCatppuccinTheme(theme) {
-  if (theme === "dark") {
-    return "mocha";
-  } else if (theme === "light") {
-    return "latte";
-  } else {
-    return null;
-  }
+  document.getElementById("themeChangeButton").ariaLabel = "Change theme to " + isDark ? "dark theme" : "light theme"
 }
 
 function toggleTheme() {
-  let old_theme = Cookies.get("theme");
-  if (old_theme === "dark") {
-    Cookies.set("theme", "light");
-  } else if (old_theme === "light") {
-    Cookies.set("theme", "dark");
-  }
+  setCookie(!getCookie())
 
   setTheme();
 }
 
 function headerTheme() {
   if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-    return Theme.LIGHT;
+    return false;
   } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    return Theme.DARK;
+    return true;
   } else {
     return DEFAULT_THEME;
+  }
+}
+
+function getCookie() {
+  return Cookies.get("isDark") === "true"
+}
+
+function setCookie(value) {
+  Cookies.set("isDark", value)
+}
+
+function testCookie() {
+  if (!(Cookies.get("isDark") === "true" || Cookies.get("isDark") === "false")) {
+    Cookies.set("isDark", headerTheme())
   }
 }
 
